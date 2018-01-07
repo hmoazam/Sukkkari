@@ -19,11 +19,12 @@
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   </head>
-  <body onload="showMyFace()">
+  <!-- <body onload="showMyFace()"> -->
+  <body>
     <video id="yourVideo" autoplay muted></video>
     <video id="friendsVideo" autoplay></video>
     <br />
-    <button onclick="showFriendsFace()" type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call Doctor</button>
+    <button onclick="showFriendsFace(); showMyFace()" type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call Doctor</button>
 
     <button onclick="endCall()" type="button" class="btn btn-danger btn-lg"><span class = "glyphicon glyphicon-earphone" aria-hidden = "true"></span> End Call </button>
 
