@@ -1,11 +1,19 @@
 //Create an account on Firebase, and use the credentials they give you in place of the following
+// var config = {
+//     apiKey: "AIzaSyDMDXI5DjKxX9eldFoWN-P-5uU6kjblKPA",
+//     authDomain: "video-chat-f7fdb.firebaseapp.com",
+//     databaseURL: "https://video-chat-f7fdb.firebaseio.com",
+//     // projectId: "video-chat-f7fdb", //no need?
+//     storageBucket: "video-chat-f7fdb.appspot.com",
+//     messagingSenderId: "782431137044"
+//   };
 var config = {
-    apiKey: "AIzaSyDMDXI5DjKxX9eldFoWN-P-5uU6kjblKPA",
-    authDomain: "video-chat-f7fdb.firebaseapp.com",
-    databaseURL: "https://video-chat-f7fdb.firebaseio.com",
-    // projectId: "video-chat-f7fdb", //no need?
-    storageBucket: "video-chat-f7fdb.appspot.com",
-    messagingSenderId: "782431137044"
+    apiKey: "AIzaSyAkfjqeLCoua-NuemRsUYrpeOXy8D-YJjo",
+    authDomain: "rtc1-f4e58.firebaseapp.com",
+    databaseURL: "https://rtc1-f4e58.firebaseio.com",
+    projectId: "rtc1-f4e58",
+    storageBucket: "rtc1-f4e58.appspot.com",
+    messagingSenderId: "311032767293"
   };
 firebase.initializeApp(config);
 
