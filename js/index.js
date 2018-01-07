@@ -13,10 +13,12 @@ var database = firebase.database().ref();
 var yourVideo = document.getElementById("yourVideo");
 var friendsVideo = document.getElementById("friendsVideo");
 var yourId = Math.floor(Math.random()*1000000000);
+// var yourId = 4;
 var servers = {'iceServers': [{'urls': 'stun:stun.services.mozilla.com'}, {'urls': 'stun:stun.l.google.com:19302'}, {'urls': 'turn:numb.viagenie.ca','credential': 'websitebeaver','username': 'websitebeaver@email.com'}]};
 
 var track = null;
-// var pc = bootConnection();
+var pc = bootConnection();
+
 
 
 function bootConnection() {
@@ -70,6 +72,7 @@ function showFriendsFace() {
   // pc = new RTCPeerConnection(servers);
   // pc.onicecandidate = (event => event.candidate?sendMessage(yourId, JSON.stringify({'ice': event.candidate})):console.log("Sent All Ice") );
   // pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
+  // pc = bootConnection();
   pc.createOffer()
     .then(offer => pc.setLocalDescription(offer) )
     .then(() => sendMessage(yourId, JSON.stringify({'sdp': pc.localDescription})) );
