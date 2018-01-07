@@ -17,6 +17,8 @@ var servers = {'iceServers': [{'urls': 'stun:stun.services.mozilla.com'}, {'urls
 var pc = new RTCPeerConnection(servers);
 pc.onicecandidate = (event => event.candidate?sendMessage(yourId, JSON.stringify({'ice': event.candidate})):console.log("Sent All Ice") );
 pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
+var track = null;
+
 
 function sendMessage(senderId, data) {
     var msg = database.push({ sender: senderId, message: data });
@@ -42,7 +44,9 @@ function readMessage(data) {
 database.on('child_added', readMessage);
 
 function showMyFace() {
-  navigator.mediaDevices.getUserMedia({audio:true, video:true})
+  navigator.mediaDevices.getUserMedia({audio:true, video:true}, function(stream) {
+    track = stream.getTracks()[0];
+  })
     .then(stream => yourVideo.srcObject = stream)
     .then(stream => pc.addStream(stream));
 }
@@ -55,6 +59,8 @@ function showFriendsFace() {
 
 function endCall() {
   // pc.close()
-  localstream.stop;
-  alert('Call Ended!');
+  // localstream.stop;
+  track.stop();
+  pc.close();
+  // alert('Call Ended!');
 }
