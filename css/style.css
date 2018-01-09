@@ -1,38 +1,52 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0px;
+    background: url("../img/back.jpg");
+    overflow: hidden;
+}
+
+.main-container {
+    margin-top: 10px;
+    height: 100%;
+}
+
 video {
-  background-color: #ddd;
-  border-radius: 7px;
-  margin: 10px 0px 0px 10px;
-  align-items: : center;
-/*  width: 300px;
-  height: 200px;*/
+    background-color: black;
+    width: 100%;
 }
+
 button {
-  margin: 5px 0px 0px 10px !important;
-  width: 300px;	
-  /*border-radius: 50%;*/
+    width: 49%;
 }
 
-#yourVideo {
-	width: 200px;
-	height: 200px;
+.videos-container {
+    position: relative;
+    height: 90%;
 }
 
-#friendsVideo {
-	width: 300px;
-	height: 200px;
+.caller-video-wrapper {
+    position: absolute;
+    width: 60%;
+    bottom: 5px;
+    right: 10px;
 }
 
-/*.button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    border-radius: 50%;
-}*/
+.caller-video-wrapper>video {
+    background: lightgray;
+}
 
+.callee-video-wrapper {
+    height: 100%;
+}
 
+.callee-video-wrapper>video {
+    height: 100%;
+}
+
+.buttons-container {
+    margin-top: 7px;
+}

@@ -1,48 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Simple VideoChat</title>
-      <link rel="stylesheet" href="css/style.css">
-
-  <style>
-    body {
-        background-image: url("img/back.jpg");
-    }
-  </style>
-
-  
+    <meta charset="UTF-8">
+    <title>Simple VideoChat</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-
-  <html>
-  <head>
+<body onload="showMyFace()">
+    <div class="main-container container-fluid">
+        <div class="videos-container">
+            <div class="callee-video-wrapper">
+                <video id="friendsVideo" autoplay></video>
+            </div>
+            <div class="caller-video-wrapper">
+                <video id="yourVideo" autoplay muted></video>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <button onclick="showFriendsFace()" type="button" class="btn btn-primary btn-responsive">
+                <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call
+            </button>
+            <button onclick="endCall()" type="button" class="btn btn-danger btn-responsive">
+                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> End
+            </button>
+        </div>
+    </div>
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body onload="showMyFace()">
-    <video id="friendsVideo" autoplay></video>
-    <video id="yourVideo" autoplay muted></video>
-
-    <br />
-
-        <button onclick="showFriendsFace()" type="button" class="btn btn-primary btn-responsive"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
-
-        <button onclick="endCall()" type="button" class="btn btn-danger btn-responsive"><span class = "glyphicon glyphicon-earphone" aria-hidden = "true"></span> End</button>
-
-
-  </body>
-</html>
-  
-  
-
-    <script  src="js/index.js"></script>
-
-
-
-
+    <script src="js/index.js"></script>
 </body>
 
 </html>
