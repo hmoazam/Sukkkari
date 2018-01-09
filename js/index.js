@@ -1,40 +1,24 @@
 //Create an account on Firebase, and use the credentials they give you in place of the following
-// var config = {
-//     apiKey: "AIzaSyDMDXI5DjKxX9eldFoWN-P-5uU6kjblKPA",
-//     authDomain: "video-chat-f7fdb.firebaseapp.com",
-//     databaseURL: "https://video-chat-f7fdb.firebaseio.com",
-//     // projectId: "video-chat-f7fdb", //no need?
-//     storageBucket: "video-chat-f7fdb.appspot.com",
-//     messagingSenderId: "782431137044"
-//   };
 var config = {
-    apiKey: "AIzaSyAkfjqeLCoua-NuemRsUYrpeOXy8D-YJjo",
-    authDomain: "rtc1-f4e58.firebaseapp.com",
-    databaseURL: "https://rtc1-f4e58.firebaseio.com",
-    projectId: "rtc1-f4e58",
-    storageBucket: "rtc1-f4e58.appspot.com",
-    messagingSenderId: "311032767293"
+    apiKey: "AIzaSyDMDXI5DjKxX9eldFoWN-P-5uU6kjblKPA",
+    authDomain: "video-chat-f7fdb.firebaseapp.com",
+    databaseURL: "https://video-chat-f7fdb.firebaseio.com",
+    // projectId: "video-chat-f7fdb", //no need?
+    storageBucket: "video-chat-f7fdb.appspot.com",
+    messagingSenderId: "782431137044"
   };
 firebase.initializeApp(config);
 
 var database = firebase.database().ref();
 var yourVideo = document.getElementById("yourVideo");
-var friendsVideo = document.getElementById("friendsVideo");
+var friendsVideo = document.getElementById("friendsVideo"); //remote video
 var yourId = Math.floor(Math.random()*1000000000);
-// var yourId = 4;
 var servers = {'iceServers': [{'urls': 'stun:stun.services.mozilla.com'}, {'urls': 'stun:stun.l.google.com:19302'}, {'urls': 'turn:numb.viagenie.ca','credential': 'websitebeaver','username': 'websitebeaver@email.com'}]};
+var pc = new RTCPeerConnection(servers);
+pc.onicecandidate = (event => event.candidate?sendMessage(yourId, JSON.stringify({'ice': event.candidate})):console.log("Sent All Ice") );
+pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
+var localVideoStream = null;
 
-var track = null;
-var pc = bootConnection();
-
-
-
-function bootConnection() {
-  var pc = new RTCPeerConnection(servers);
-  pc.onicecandidate = (event => event.candidate?sendMessage(yourId, JSON.stringify({'ice': event.candidate})):console.log("Sent All Ice") );
-  pc.onaddstream = (event => friendsVideo.srcObject = event.stream);  
-  return pc;
-}
 
 
 function sendMessage(senderId, data) {
@@ -62,35 +46,43 @@ database.on('child_added', readMessage);
 
 function showMyFace() {
   navigator.mediaDevices.getUserMedia({audio:true, video:true})
-    // .then(stream => yourVideo.srcObject = stream)
+    .then(stream => yourVideo.srcObject = stream)
+    .then(stream => pc.addStream(stream))
     .then(function(stream){
-      yourVideo.srcObject = stream;
-      track = stream.getTracks()[1];
-      return stream;
-    })
-    // .then(stream => pc.addStream(stream));
-    .then(function(stream){
-      pc = bootConnection();
-      pc.addStream(stream);
-      return stream;
-    })
+      localVideoStream = stream
+    });
 }
 
 function showFriendsFace() {
-  // pc = new RTCPeerConnection(servers);
-  // pc.onicecandidate = (event => event.candidate?sendMessage(yourId, JSON.stringify({'ice': event.candidate})):console.log("Sent All Ice") );
-  // pc.onaddstream = (event => friendsVideo.srcObject = event.stream);
-  // pc = bootConnection();
   pc.createOffer()
     .then(offer => pc.setLocalDescription(offer) )
     .then(() => sendMessage(yourId, JSON.stringify({'sdp': pc.localDescription})) );
-
 }
 
 function endCall() {
-  // pc.close()
-  // localstream.stop;
-  track.stop();
   pc.close();
-  // alert('Call Ended!');
-}
+  pc = null;
+  if (localVideoStream) {
+    localVideoStream.getTracks().forEach(function (track) {
+      track.stop();
+    });
+    // yourVideo.srcObject = "";
+  }
+  // if (friendsVideo) friendsVideo.srcObject = "";
+  yourVideo.srcObject = null;
+  friendsVideo.srcObject = null;
+};
+
+  // navigator.mediaDevices.getUserMedia({audio:false, video:false})//get error that one of audio or video must be used
+
+
+
+// // create a button to toggle video 
+//     var button = document.createElement("button");
+//     button.appendChild(document.createTextNode("Toggle Hold"));
+//     document.body.appendChild(button);
+
+//     button.onclick = function(){
+//         mediaStream.getVideoTracks()[0].enabled =
+//          !(mediaStream.getVideoTracks()[0].enabled);
+//     }

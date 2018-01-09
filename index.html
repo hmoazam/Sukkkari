@@ -4,9 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Simple VideoChat</title>
-  
       <link rel="stylesheet" href="css/style.css">
 
+  <style>
+    body {
+        background-image: url("img/back.jpg");
+    }
+  </style>
+
+  
 </head>
 
 <body>
@@ -16,14 +22,16 @@
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   </head>
-  <!-- <body onload="showMyFace()"> -->
-  <body>
-    <video id="yourVideo" autoplay muted></video>
+  <body onload="showMyFace()">
     <video id="friendsVideo" autoplay></video>
-    <br />
-    <button onclick="showFriendsFace(); showMyFace()" type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call Doctor</button>
+    <video id="yourVideo" autoplay muted></video>
 
-    <button onclick="endCall()" type="button" class="btn btn-danger btn-lg"><span class = "glyphicon glyphicon-earphone" aria-hidden = "true"></span> End Call </button>
+    <br />
+
+        <button onclick="showFriendsFace()" type="button" class="btn btn-primary btn-responsive"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
+
+        <button onclick="endCall()" type="button" class="btn btn-danger btn-responsive"><span class = "glyphicon glyphicon-earphone" aria-hidden = "true"></span> End</button>
+
 
   </body>
 </html>
