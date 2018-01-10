@@ -30,7 +30,8 @@ button {
 
 .caller-video-wrapper {
     position: absolute;
-    width: 60%;
+    width: 200px;
+    height: 200px;
     bottom: 5px;
     right: 10px;
 }
