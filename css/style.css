@@ -34,7 +34,7 @@ button {
     bottom: 5px;
     right: 10px;
     height: 200px; /*just added this, check on phone*/
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .caller-video-wrapper>video {
